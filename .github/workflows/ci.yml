@@ -98,7 +98,7 @@ jobs:
         with:
           run: .\UseLocalFramework.ps1
 
-        - name: Use Local Framework Unix
+      - name: Use Local Framework Unix
         run: chmod +x UseLocalFramework.sh && ./UseLocalFramework.sh
 
       - name: Compile
