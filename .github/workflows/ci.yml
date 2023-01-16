@@ -29,6 +29,12 @@ jobs:
 
       - name: Restore Tools
         run: dotnet tool restore
+      
+      - name: Checkout Local Framewrok
+        run: git clone https://github.com/cai1hsu/osu-framework ../osu-framework 
+
+      - name: Use Local Framework
+        run: chmod +x UseLocalFramework.sh && ./UseLocalFramework.sh
 
       - name: Restore Packages
         run: dotnet restore osu.Desktop.slnf
