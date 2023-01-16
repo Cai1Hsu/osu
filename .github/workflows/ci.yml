@@ -95,7 +95,7 @@ jobs:
 
       - name: Use Local Framework Windows
         if: matrix.os == 'windows-latest'
-        run: chmod +x UseLocalFramework.sh && ./UseLocalFramework.sh
+        run: .\UseLocalFramework.ps1
 
         - name: Use Local Framework Unix
         run: chmod +x UseLocalFramework.sh && ./UseLocalFramework.sh
@@ -133,7 +133,7 @@ jobs:
         run: git clone https://github.com/cai1hsu/osu-framework ../osu-framework 
 
       - name: Use Local Framework
-        run: chmod +x UseLocalFramework.sh && ./UseLocalFramework.sh
+        run: .\UseLocalFramework.ps1
 
       - name: Install .NET workloads
         run: dotnet workload install maui-android
