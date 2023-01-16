@@ -90,14 +90,18 @@ jobs:
         with:
           dotnet-version: "6.0.x"
 
-      - name: Checkout Local Framewrok
-        run: git clone https://github.com/cai1hsu/osu-framework ../osu-framework 
+      - name: Checkout  Local Framewrok
+        uses: actions/checkout@v3.3.0
+        with:
+         repository: https://github.com/cai1hsu/osu-framework
+         path: $GITHUB_WORKSPACE
 
       - name: Use Local Framework Windows
         if: matrix.os.fullname == 'windows-latest'
         run: .\UseLocalFramework.ps1
 
       - name: Use Local Framework Unix
+        if: matrix.os.fullname == 'macos-latest' || matrix.os.fullname == 'ubuntu-latest'
         run: chmod +x UseLocalFramework.sh && ./UseLocalFramework.sh
 
       - name: Compile
