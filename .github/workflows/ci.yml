@@ -90,11 +90,8 @@ jobs:
         with:
           dotnet-version: "6.0.x"
 
-      - name: Checkout  Local Framewrok
-        uses: actions/checkout@v3.3.0
-        with:
-         repository: cai1hsu/osu-framework
-         path:  ${{ github.workspace }}/../
+      - name: Checkout Local Framewrok
+        run: git clone https://github.com/cai1hsu/osu-framework ../osu-framework 
 
       - name: Use Local Framework Windows
         if: matrix.os.fullname == 'windows-latest'
