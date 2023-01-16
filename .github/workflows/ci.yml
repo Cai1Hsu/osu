@@ -93,7 +93,7 @@ jobs:
       - name: Checkout  Local Framewrok
         uses: actions/checkout@v3.3.0
         with:
-         repository: https://github.com/cai1hsu/osu-framework
+         repository: cai1hsu/osu-framework
          path: $GITHUB_WORKSPACE
 
       - name: Use Local Framework Windows
