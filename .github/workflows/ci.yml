@@ -94,7 +94,7 @@ jobs:
         run: git clone https://github.com/cai1hsu/osu-framework ../osu-framework 
 
       - name: Use Local Framework Windows
-        if: matrix.os == 'windows-latest'
+        if: matrix.os.fullname == 'windows-latest'
         run: .\UseLocalFramework.ps1
 
       - name: Use Local Framework Unix
