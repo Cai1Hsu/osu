@@ -29,6 +29,12 @@ jobs:
 
       - name: Restore Tools
         run: dotnet tool restore
+      
+      - name: Checkout Local Framewrok
+        run: git clone https://github.com/cai1hsu/osu-framework ../osu-framework 
+
+      - name: Use Local Framework
+        run: chmod +x UseLocalFramework.sh && ./UseLocalFramework.sh
 
       - name: Restore Packages
         run: dotnet restore osu.Desktop.slnf
@@ -54,7 +60,6 @@ jobs:
             fi
           done <<< $(dotnet codefilesanity)
           exit $exit_code
-
       - name: InspectCode
         run: dotnet jb inspectcode $(pwd)/osu.Desktop.slnf --no-build --output="inspectcodereport.xml" --caches-home="inspectcode" --verbosity=WARN
 
@@ -84,6 +89,17 @@ jobs:
         with:
           dotnet-version: "6.0.x"
 
+      - name: Use Local Framework Windows
+        if: matrix.os.fullname == 'windows-latest'
+        run: |
+          git clone https://github.com/cai1hsu/osu-framework ../osu-framework 
+          ./UseLocalFramework.ps1
+
+      - name: Use Local Framework Unix
+        if: matrix.os.fullname == 'macos-latest' || matrix.os.fullname == 'ubuntu-latest'
+        run: |
+          git clone https://github.com/cai1hsu/osu-framework ../osu-framework 
+          chmod +x UseLocalFramework.sh && ./UseLocalFramework.sh
       - name: Compile
         run: dotnet build -c Debug -warnaserror osu.Desktop.slnf
 
@@ -112,6 +128,12 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: "6.0.x"
+      
+      - name: Checkout Local Framewrok
+        run: git clone https://github.com/cai1hsu/osu-framework ..\osu-framework
+
+      - name: Use Local Framework
+        run: .\UseLocalFramework.ps1
 
       - name: Install .NET workloads
         run: dotnet workload install maui-android
@@ -135,11 +157,16 @@ jobs:
         run: |
           sudo xcode-select -s "/Applications/Xcode_14.1.app"
           echo "MD_APPLE_SDK_ROOT=/Applications/Xcode_14.1.app" >> $GITHUB_ENV
-
       - name: Install .NET 6.0.x
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: "6.0.x"
+
+      - name: Checkout Local Framewrok
+        run: git clone https://github.com/cai1hsu/osu-framework ../osu-framework 
+
+      - name: Use Local Framework
+        run: chmod +x UseLocalFramework.sh && ./UseLocalFramework.sh
 
       - name: Install .NET Workloads
         run: dotnet workload install maui-ios
